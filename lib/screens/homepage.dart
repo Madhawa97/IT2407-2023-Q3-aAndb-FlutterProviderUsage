@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/eligibilityProvider.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -27,11 +29,16 @@ class _HomepageState extends State<Homepage> {
         }),
         SizedBox(height: 40),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            context
+                .read<EligibilityProvider>()
+                .checkEli(GradeForMaths, GradeForIT);
+          },
           child: Text("Check"),
         ),
         SizedBox(height: 40),
-        Text("Your are Eligibile for : "),
+        Text(
+            "Your are Eligibile for : ${context.watch<EligibilityProvider>().eligibleFor.toString()}"),
         Expanded(
             child: Container(
           color: Colors.amber,
